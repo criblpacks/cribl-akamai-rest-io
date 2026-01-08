@@ -121,9 +121,9 @@ in_akamai_siem_integration_offset_advanced:
         stateUpdateExpression: >-
           {
             [__collectible.id]: {
-              latestTime: _raw.httpMessage.start ?(((state[__collectible.id].latestTime || 0) > _time)
+              latestTime: httpMessage.start ?(((state[__collectible.id].latestTime || 0) > _time)
                 ? state[__collectible.id].latestTime 
-                : Math.round(_raw.httpMessage.start))
+                : Math.round(httpMessage.start))
                 :state[__collectible.id].latestTime ,
                 offset: offset!==false?offset:'',
                 lag_status: ((Date.now() / 1000)-state[__collectible.id].latestTime) >300?'above300s':(((Date.now() / 1000)-state[__collectible.id].latestTime)>180?'above180s':'ok'),
@@ -236,9 +236,9 @@ in_akamai_siem_integration_multithreaded:
       stateTracking:
         stateUpdateExpression: >-
           {
-                latestTime: _raw.httpMessage.start ?(((state.latestTime || 0) > _time)
+                latestTime: httpMessage.start ?(((state.latestTime || 0) > _time)
                 ? state.latestTime 
-                : Math.round(_raw.httpMessage.start))
+                : Math.round(httpMessage.start))
                 :state.latestTime,
                 lag_status: ((Date.now() / 1000)-state.latestTime) >60?'lag':'ok',
                 total: total ? total : '',

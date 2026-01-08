@@ -18,12 +18,6 @@ functions:
     disabled: null
     conf:
       comment: "Author: Cribl Packs Team"
-  - id: drop
-    filter: offset || __drop === true
-    disabled: null
-    conf: {}
-    description: Drop offset context events. This metadata is used for state
-      tracking prior to this pipeline.
   - id: serde
     filter: "true"
     disabled: null
@@ -31,6 +25,12 @@ functions:
       mode: extract
       type: json
       srcField: _raw
+  - id: drop
+    filter: offset || __drop === true
+    disabled: null
+    conf: {}
+    description: Drop offset context events. This metadata is used for state
+      tracking prior to this pipeline.
   - id: code
     filter: "true"
     disabled: false
